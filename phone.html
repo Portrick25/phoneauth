@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script>
+
+         // Your web app's Firebase configuration
+ var firebaseConfig = {
+    apiKey: "AIzaSyC1SSuF6ibJw6vpzbb38WDVBl2f4EWXYJY",
+    authDomain: "samchikitsa-f6d9b.firebaseapp.com",
+    databaseURL: "https://samchikitsa-f6d9b.firebaseio.com",
+    projectId: "samchikitsa-f6d9b",
+    storageBucket: "samchikitsa-f6d9b.appspot.com",
+    messagingSenderId: "196670220970",
+    appId: "1:196670220970:web:201a0e8a9cce3cefb27ed3",
+    measurementId: "G-TBY5QYXRB6"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+
+
+
+        
+window.onload = function(){
+    render();
+};
+
+function render(){
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    recaptchaVerifier.render();
+}
+
+function phoneAuth(){
+    var number = document.getElementById('number');
+    firebase.auth().SignInWithPhoneNumber(number.value,window.recaptchaVerifier).then(function(confirmation){
+        window.confirmationResult = confirmationResult;
+        coderesult = confirmationResult;
+        console.log(coderesult);
+        alert("message sent");
+    }).catch(function (error){
+        alert(error.message);
+    });
+
+}
+
+
+function codeVerify(){
+    var code = document.getElementById('verificationCode').value;
+    coderesult.confirm(code).then(function(result){
+        alert("successfully registered");
+        var user = result.user();
+        console.log(user);
+    }).catch(function (error){
+        alert(error.message);
+    })
+}
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="formcontainer">
+        <div id="header">Signup With Phone</div>
+        <input type="text" name="number" id="number" placeholder="+91**********" required><br>
+        <b><div id="recaptcha-container" style="text-align: center;"></div><br></b>
+        <button onclick="phoneAuth()" id="phoneAuth">Send Code</button>
+    </form>
+    <form action="" id="formcontainer">
+        <input type="text" name="code" id="verifiactionCode" placeholder="enter code here"><br>
+        <button type="submit" onclick="codeVerify();"> Verify</button>
+    </form>
+    </div>
+</body>
+</html>
