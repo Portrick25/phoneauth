@@ -40,7 +40,7 @@ function render(){
 
 function phoneAuth(){
     var number = document.getElementById('number');
-    firebase.auth().SignInWithPhoneNumber(number.value,window.recaptchaVerifier).then(function(confirmation){
+    firebase.auth().SignInWithPhoneNumber(number.value,window.recaptchaVerifier).then(function(confirmationResult){
         window.confirmationResult = confirmationResult;
         coderesult = confirmationResult;
         console.log(coderesult);
