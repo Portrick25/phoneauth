@@ -37,7 +37,7 @@ function render(){
 }
 
 function phoneAuth(response){
-    response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
+    response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
     var number = document.getElementById('number');
     firebase.auth().SignInWithPhoneNumber(number.value,window.recaptchaVerifier).then(function(confirmationResult){
         window.confirmationResult = confirmationResult;
