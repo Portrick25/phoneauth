@@ -26,8 +26,6 @@
   const db = firebase.firestore();
   const auth = firebase.auth();
 
-
-response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
         
 window.onload = function(){
     render();
@@ -38,7 +36,7 @@ function render(){
     recaptchaVerifier.render();
 }
 
-function phoneAuth(){
+function phoneAuth(response){
     response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
     var number = document.getElementById('number');
     firebase.auth().SignInWithPhoneNumber(number.value,window.recaptchaVerifier).then(function(confirmationResult){
